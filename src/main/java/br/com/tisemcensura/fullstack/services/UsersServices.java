@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -23,13 +22,6 @@ public class UsersServices {
 	@Autowired
 	private UsersRepository repository;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
-	
-//	private String comparate;
-//	
-//	private Boolean teste;
-	
 	@CrossOrigin
 	@GetMapping
 	public List<Users> findAll(){return repository.findAll();}
@@ -44,10 +36,6 @@ public class UsersServices {
 	@CrossOrigin
 	@PostMapping
 	public Users create(@Validated @RequestBody Users user){		
-//		this.comparate = passwordEncoder.encode(user.getPassword());		
-//	    this.teste = passwordEncoder.matches(user.getPassword(),this.comparate);
-//	    System.out.println(this.teste);
-//	    user.setPassword(this.comparate);
 	   return repository.save(user);
 	} //post end
 	

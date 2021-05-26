@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @Entity
 @Table( name = "users")
@@ -22,8 +22,6 @@ private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	
-//	@Autowired
-//	private PasswordEncoder passwordEncoder;
 	
 	public Users(Long id, String username, String password) {
 		super();
