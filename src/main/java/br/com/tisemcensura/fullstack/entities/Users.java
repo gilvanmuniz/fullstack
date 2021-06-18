@@ -22,6 +22,8 @@ private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	
+	public Users() {		
+	}
 	
 	public Users(Long id, String username, String password) {
 		super();

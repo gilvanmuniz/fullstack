@@ -3,7 +3,10 @@ package br.com.tisemcensura.fullstack.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,6 +29,16 @@ public class UsersServices {
 	@GetMapping
 	public List<Users> findAll(){return repository.findAll();}
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	private String senhaComHash;
+	
+	@Bean
+	public BCryptPasswordEncoder bcryptPassword() {
+		return new BCryptPasswordEncoder();
+	}
+			
 	@CrossOrigin
 	public ResponseEntity<?> findById(@PathVariable long id){
 		return repository.findById(id)
@@ -35,7 +48,9 @@ public class UsersServices {
 	
 	@CrossOrigin
 	@PostMapping
-	public Users create(@Validated @RequestBody Users user){		
+	public Users create(@Validated @RequestBody Users user){
+		this.senhaComHash = passwordEncoder.encode(user.getPassword());
+		user.setPassword(this.senhaComHash);
 	   return repository.save(user);
 	} //post end
 	
