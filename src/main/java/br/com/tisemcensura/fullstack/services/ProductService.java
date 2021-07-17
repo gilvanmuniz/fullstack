@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.tisemcensura.fullstack.entities.Product;
+import br.com.tisemcensura.fullstack.exceptions.ResourceNotFoundException;
 import br.com.tisemcensura.fullstack.repositories.ProductRepository;
 
 @Service
@@ -21,7 +22,7 @@ public class ProductService {
 	
 	public Product findById(Long id) {
 		Optional<Product> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public Product save(Product product) {
